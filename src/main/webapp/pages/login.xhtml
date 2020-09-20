@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<meta http-equiv="Content Type" content="text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="login.css" /> 
+	</h:head>
+	
+	<h:body>
+		
+    	<h:form class="fullscreen center">
+    	
+    		<p:commandButton value="Click-me" action="#{empresaM.action()}" update="empresas" />
+    		
+    		<p:dataTable id="empresas" value="#{empresaM.list}" var="row">
+    		
+    			<p:column headerText="#{lbl.id}">
+    				<h:outputText value="#{row.id}" />
+    			</p:column>
+    			
+    			<p:column headerText="#{lbl.nomeFantasia}">
+    				<h:outputText value="#{row.nomeFantasia}" />
+    			</p:column>
+    			
+    			<p:column headerText="#{lbl.razaoSocial}">
+    				<h:outputText value="#{row.razaoSocial}" />
+    			</p:column>
+    			
+    			<p:column headerText="#{lbl.cnpj}">
+    				<h:outputText value="#{row.cnpj}" />
+    			</p:column>
+    		
+    		</p:dataTable>
+    		
+        </h:form>
+	</h:body>
+</html>
