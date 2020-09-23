@@ -1,6 +1,8 @@
 package com.stock.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -52,11 +54,13 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 	        }
 	        
 	        transaction.commit();
+	        session.flush();
+	        
 		} catch (Exception e) {
 			if (transaction != null) {
                 transaction.rollback();
             }
-			
+			HibernateUtil.shutdown();
             e.printStackTrace();
 		}
 	}
@@ -64,17 +68,41 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 	public T findById(Long id) {
 		Transaction transaction = null;
 		T result = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession();) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
 			transaction = session.beginTransaction();
 			
-			result = session.createQuery(String.format("from %s", getClass().getName()), getClasz()).getSingleResult();
+			String query = String.format("from %s", getClasz().getName());
+			
+			result = (T) session.createQuery(query, getClasz().getClass()).getSingleResult();
 			
 		} catch (Exception e) {
-			if (transaction != null) {
-                transaction.rollback();
-            }
-			
             e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		
+		return result;
+	}
+	
+	public List<T> findAll() {
+		Transaction transaction = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		List<T> result = new ArrayList<>();
+		
+		try {
+			transaction = session.beginTransaction();
+			
+			String query = String.format("from %s", getClasz().getName());
+			
+			result = (List<T>) session.createQuery(query).list();
+			
+		} catch (Exception e) {
+            e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
 		}
 		
 		return result;

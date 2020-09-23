@@ -13,10 +13,6 @@ public class EmpresaService extends GenericService<Empresa, Long> {
 	
 	private static final long serialVersionUID = 6641965250693961315L;
 
-	public Empresa findById(Long id) {
-		return getEmpresaDAO().findById(id);
-	}
-	
 	private EmpresaDAO getEmpresaDAO() {
 		return (EmpresaDAO) super.getBaseDAO();
 	}

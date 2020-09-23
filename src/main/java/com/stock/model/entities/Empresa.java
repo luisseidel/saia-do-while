@@ -13,7 +13,6 @@ import lombok.Setter;
 
 @Entity
 @Setter
-@Getter
 @NoArgsConstructor
 @Table(name = "EMPRESAS")
 public class Empresa extends BaseEntity {
@@ -22,13 +21,8 @@ public class Empresa extends BaseEntity {
 		super(id);
 	}
 
-	@Column(name = "tx_nm_fantasia")
 	private String nomeFantasia;
-
-	@Column(name = "tx_nm_razao_social")
 	private String razaoSocial;
-	
-	@Column(name = "tx_cnpj")
 	private String cnpj;
 	
 	@Id
@@ -42,6 +36,21 @@ public class Empresa extends BaseEntity {
 	@Override
 	public void setId(Long id) {
 		super.setId(id);
+	}
+	
+	@Column(name = "nm_fantasia")
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+	
+	@Column(name = "nm_razao_social")
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+	
+	@Column(name = "tx_cnpj")
+	public String getCnpj() {
+		return cnpj;
 	}
 	
 }

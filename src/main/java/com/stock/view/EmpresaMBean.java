@@ -30,9 +30,7 @@ public class EmpresaMBean extends GenericMBean<Empresa, Long> {
 		e.setRazaoSocial("razao social");
 		e.setCnpj("000 000 000 000 000");
 		
-		e = getEmpresaService().findById(1L);
-		
-		list.add(e);
+		list = getEmpresaService().findAll();
 	}
 	
 	private EmpresaService getEmpresaService() {

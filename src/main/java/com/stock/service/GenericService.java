@@ -1,6 +1,7 @@
 package com.stock.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,6 +43,14 @@ public abstract class GenericService<T, PK extends Serializable> implements Seri
 	}
 	
 	public void afterUpdate() {}
+	
+	public T findById(Long id) {
+		return baseDAO.findById(id);
+	}
+	
+	public List<T> findAll() {
+		return baseDAO.findAll();
+	}
 	
 	protected GenericDAO<T, PK> getBaseDAO() {
 		return baseDAO;
