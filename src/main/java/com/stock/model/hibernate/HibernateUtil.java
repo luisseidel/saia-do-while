@@ -46,9 +46,6 @@ public class HibernateUtil<T> {
         return sessionFactory;
     }
 
-    /**
-     * Close the conection
-     */
     public static void shutdown() {
         getSessionFactory().close();
     }
