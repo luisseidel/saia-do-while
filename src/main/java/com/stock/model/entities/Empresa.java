@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -17,14 +16,14 @@ import lombok.Setter;
 @Table(name = "EMPRESAS")
 public class Empresa extends BaseEntity {
 
+	private String nomeFantasia;
+	private String razaoSocial;
+	private String cnpj;
+
 	public Empresa(Long id) {
 		super(id);
 	}
 
-	private String nomeFantasia;
-	private String razaoSocial;
-	private String cnpj;
-	
 	@Id
 	@Override
 	@Column(name = "id_empresa")
@@ -51,6 +50,5 @@ public class Empresa extends BaseEntity {
 	@Column(name = "tx_cnpj")
 	public String getCnpj() {
 		return cnpj;
-	}
-	
+	} 
 }

@@ -1,20 +1,22 @@
 package com.stock.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.validation.annotation.Validated;
 
-import com.stock.model.hibernate.HibernateUtil;
 import com.stock.model.type.TransactionType;
+import com.stock.utils.HibernateUtil;
 
 public abstract class GenericDAO<T, PK extends Serializable> implements Serializable {
 
 	private static final long serialVersionUID = 4537346584918634683L;
 	private Class<T> clasz;
+	private T entity;
 	private TransactionType transactionType;
 	
 	protected GenericDAO () {}
@@ -41,8 +43,9 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 	
 	public void getTransaction(TransactionType transactionType, T entity) {
 		Transaction transaction = null;
+		Session session = HibernateUtil.openSession(entity);
 		
-		try (Session session = HibernateUtil.getSessionFactory().openSession();) {
+		try {
 			transaction = session.beginTransaction();
 			
 	        if (transactionType == TransactionType.INSERT) {
@@ -60,53 +63,30 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 			if (transaction != null) {
                 transaction.rollback();
             }
-			HibernateUtil.shutdown();
             e.printStackTrace();
+		} finally {
+			session.close();
 		}
 	}
 	
 	public T findById(Long id) {
-		Transaction transaction = null;
-		T result = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.openSession(entity);
+		
 		try {
-			transaction = session.beginTransaction();
-			
-			String query = String.format("from %s", getClasz().getName());
-			
-			result = (T) session.createQuery(query, getClasz().getClass()).getSingleResult();
+			Criteria crit = session.createCriteria(getClasz());
+			crit.add(Restrictions.idEq(id));
+			return (T) crit.uniqueResult();
 			
 		} catch (Exception e) {
             e.printStackTrace();
 		} finally {
-			if (session != null)
-				session.close();
+			session.close();
 		}
 		
-		return result;
+		return null;
 	}
 	
-	public List<T> findAll() {
-		Transaction transaction = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		List<T> result = new ArrayList<>();
-		
-		try {
-			transaction = session.beginTransaction();
-			
-			String query = String.format("from %s", getClasz().getName());
-			
-			result = (List<T>) session.createQuery(query).list();
-			
-		} catch (Exception e) {
-            e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
-		}
-		
-		return result;
-	}
+	public abstract List<T> findByExample(T entity); 
 	
 	public Class<T> getClasz() {
 		return clasz;
@@ -116,6 +96,14 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 		this.clasz = clazz;
 	}
 	
+	public T getEntity() {
+		return entity;
+	}
+	
+	public void setEntity(T entity) {
+		this.entity = entity;
+	}
+	
 	public TransactionType getTransactionType() {
 		return transactionType;
 	}
@@ -123,5 +111,6 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 	public void setTransactionType(TransactionType transactionType) {
 		this.transactionType = transactionType;
 	}
+
 	
 }

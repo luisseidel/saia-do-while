@@ -1,13 +1,11 @@
 package com.stock.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.stock.controller.service.EmpresaService;
 import com.stock.model.entities.Empresa;
-import com.stock.service.services.EmpresaService;
+import com.stock.utils.MessageUtils;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,18 +17,18 @@ import lombok.Setter;
 public class EmpresaMBean extends GenericMBean<Empresa, Long> {
 
 	private static final long serialVersionUID = 1223739738744010169L;
-	private List<Empresa> list;
+	private Empresa entitySearch;
+	
+	@Override
+	public void init() {
+		super.init();
+		entitySearch = new Empresa();
+	}
 
-	public void action() {
-		list = new ArrayList<>();
-		
-		Empresa e = new Empresa();
-		e.setId(1L);
-		e.setNomeFantasia("nome fantasia");
-		e.setRazaoSocial("razao social");
-		e.setCnpj("000 000 000 000 000");
-		
-		list = getEmpresaService().findAll();
+	public void find() {
+		super.list = getEmpresaService().findByExample(entitySearch);
+		MessageUtils.infoMessage("msg_insert");
+		MessageUtils.fatalMessage("msg_insert");
 	}
 	
 	private EmpresaService getEmpresaService() {

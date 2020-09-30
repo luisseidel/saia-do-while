@@ -1,4 +1,4 @@
-package com.stock.service;
+package com.stock.controller;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stock.model.GenericDAO;
+import com.stock.utils.MessageUtils;
 
 public abstract class GenericService<T, PK extends Serializable> implements Serializable {
 
@@ -19,6 +20,7 @@ public abstract class GenericService<T, PK extends Serializable> implements Seri
 	public void insert(T entity) {
 		this.beforeInsert();
 		getBaseDAO().insert(entity);
+		MessageUtils.insertMessage();
 		this.afterInsert();
 	}
 	
@@ -29,6 +31,7 @@ public abstract class GenericService<T, PK extends Serializable> implements Seri
 	public void delete(T entity) {
 		this.beforeDelete();
 		getBaseDAO().delete(entity);
+		MessageUtils.deleteMessage();
 		this.afterDelete();
 	}
 	
@@ -39,6 +42,7 @@ public abstract class GenericService<T, PK extends Serializable> implements Seri
 	public void update(T entity) {
 		this.beforeUpdate();
 		getBaseDAO().update(entity);
+		MessageUtils.updateMessage();
 		this.afterUpdate();
 	}
 	
@@ -48,8 +52,8 @@ public abstract class GenericService<T, PK extends Serializable> implements Seri
 		return baseDAO.findById(id);
 	}
 	
-	public List<T> findAll() {
-		return baseDAO.findAll();
+	public List<T> findByExample(T entity) {
+		return baseDAO.findByExample(entity);
 	}
 	
 	protected GenericDAO<T, PK> getBaseDAO() {

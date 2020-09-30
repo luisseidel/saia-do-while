@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+					  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+  	  xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      template="./layoutBase.xhtml">
+      
+	<ui:define name="content">
+		<h:form id="formList">
+			
+			<p:growl id="growlMessages" showDetail="true" />
+			<p:messages id="messages" showDetail="true" closable="true" />
+		
+			<p:panel id="searchParameters" header="#{lbl.pesquisa}" style="margin-bottom: 1%">
+				<h:panelGrid columns="2" captionClass="label,value">
+					<ui:insert name="searchParameters"/>
+				</h:panelGrid>
+			</p:panel>
+			
+			<ui:insert name="dataTable" />
+		</h:form>
+		
+		<ui:insert name="afterForm" />
+
+		<ui:insert name="saveState" />
+		
+	</ui:define>
+      
+</ui:composition>

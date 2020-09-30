@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+					  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+  	  xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      template="../templates/listLayout.xhtml">
+    
+	<ui:define name="searchParameters">
+	
+		<p:outputLabel value="#{lbl.codigo}"/>		
+		<p:inputText value="#{empresaM.entitySearch.id}"/>
+		
+		<p:outputLabel value="#{lbl.nomeFantasia}" />
+		<p:inputText value="#{empresaM.entitySearch.nomeFantasia}" />
+		
+		<p:outputLabel value="#{lbl.razaoSocial}" />
+		<p:inputText value="#{empresaM.entitySearch.razaoSocial}" />
+		
+		<p:outputLabel value="#{lbl.cnpj}" />
+		<p:inputMask value="#{empresaM.entitySearch.cnpj}" mask="#{lbl.cnpj_mask}" maxlength="14" />
+		
+		<p:commandButton value="#{lbl.pesquisar}" action="#{empresaM.find()}" update="empresas growlMessages" icon="pi pi-search" />
+		
+	</ui:define>
+	
+	<ui:define name="dataTable">
+		<p:dataTable id="empresas" value="#{empresaM.list}" var="row"
+					 emptyMessage="#{msg.nenhum_registro_encontrado}"
+					 rows="10" rowsPerPageLabel="10, 15, 20, 30"
+					 paginator="true" paginatorPosition="bottom"  
+					 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					 >
+   			<p:column headerText="#{lbl.id}">
+   				<h:outputText value="#{row.id}" />
+   			</p:column>
+   			
+   			<p:column headerText="#{lbl.nomeFantasia}">
+   				<h:outputText value="#{row.nomeFantasia}" />
+   			</p:column>
+   			
+   			<p:column headerText="#{lbl.razaoSocial}">
+   				<h:outputText value="#{row.razaoSocial}" />
+   			</p:column>
+   			
+   			<p:column headerText="#{lbl.cnpj}">
+   				<h:outputText value="#{row.cnpj}" />
+   			</p:column>
+   		
+   		</p:dataTable>
+	</ui:define>
+	
+	<ui:define name="saveState">
+		<t:saveState value="#{empresaM.list}" />
+	</ui:define>
+      
+</ui:composition>

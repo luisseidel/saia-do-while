@@ -1,21 +1,19 @@
-package com.stock.model.hibernate;
+package com.stock.utils;
 
 import java.util.Properties;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
-import com.stock.model.entities.Empresa;
-
-
-public class HibernateUtil<T> {
+public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
     
-    public static SessionFactory getSessionFactory() {
+    public static <T> SessionFactory getSessionFactory(T entity) {
         if (sessionFactory == null) {
             try {
             	
@@ -32,8 +30,7 @@ public class HibernateUtil<T> {
             	props.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
             	configuration.setProperties(props);
-            	
-            	configuration.addAnnotatedClass(Empresa.class);
+            	configuration.addAnnotatedClass(entity.getClass());
             	
             	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             	
@@ -45,9 +42,9 @@ public class HibernateUtil<T> {
         }
         return sessionFactory;
     }
-
-    public static void shutdown() {
-        getSessionFactory().close();
+    
+    public static <T> Session openSession(T entity) {
+    	return getSessionFactory(entity).openSession();
     }
     
 }
