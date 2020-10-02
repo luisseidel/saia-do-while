@@ -1,2 +1,7 @@
 @charset "ISO-8859-1";
 
+.loginBox {
+	background-color: white;
+	justify-content: center;
+	vertical-align: middle;
+}

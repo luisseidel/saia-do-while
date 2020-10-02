@@ -32,6 +32,10 @@ public abstract class GenericMBean<T, PK extends Serializable> implements Serial
 	
 	public void afterSearch() {}
 	
+	public String insert() {
+		return "edit.xhtml";
+	}
+	
 	public GenericService<T, PK> getBaseService() {
 		return baseService;
 	}

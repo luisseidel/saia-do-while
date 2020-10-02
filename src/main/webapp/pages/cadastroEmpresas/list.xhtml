@@ -7,7 +7,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:t="http://myfaces.apache.org/tomahawk"
-      template="../templates/listLayout.xhtml">
+      template="../templates/listLayout.xhtml" >
     
 	<ui:define name="searchParameters">
 	
@@ -23,7 +23,8 @@
 		<p:outputLabel value="#{lbl.cnpj}" />
 		<p:inputMask value="#{empresaM.entitySearch.cnpj}" mask="#{lbl.cnpj_mask}" maxlength="14" />
 		
-		<p:commandButton value="#{lbl.pesquisar}" action="#{empresaM.find()}" update="empresas growlMessages" icon="pi pi-search" />
+		<p:commandButton value="#{lbl.pesquisar}" action="#{empresaM.find()}" update="empresas growlMessages" icon="#{lbl.icon_search}" />
+		<p:commandButton value="#{lbl.inserir}" action="#{empresaM.insert()}" update="empresas growlMessages" icon="#{lbl.icon_insert}" />
 		
 	</ui:define>
 	

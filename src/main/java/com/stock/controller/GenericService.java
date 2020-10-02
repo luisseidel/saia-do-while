@@ -53,7 +53,7 @@ public abstract class GenericService<T, PK extends Serializable> implements Seri
 	}
 	
 	public List<T> findByExample(T entity) {
-		return baseDAO.findByExample(entity);
+		return getBaseDAO().findByExample(entity);
 	}
 	
 	protected GenericDAO<T, PK> getBaseDAO() {

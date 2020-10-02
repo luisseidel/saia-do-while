@@ -6,10 +6,12 @@ import org.hibernate.criterion.Restrictions;
 
 import com.stock.model.entities.Empresa;
 
-public class EmpresaDAOHelper {
+public class EmpresaDAOHelper extends GenericDAOHelper<Empresa> {
 
-	public static Criteria queryForFindEmpresaByExample(Empresa entity, Criteria crit) {
-		
+	private static EmpresaDAOHelper INSTANCE;
+	
+	@Override
+	public Criteria findByExample(Empresa entity, Criteria crit) {
 		if (entity.getId() != null)
 			crit.add(Restrictions.idEq(entity.getId()));
 		
@@ -23,7 +25,13 @@ public class EmpresaDAOHelper {
 			crit.add(Restrictions.like("cnpj", entity.getCnpj()));
 		
 		return crit;
+	}
+
+	public static EmpresaDAOHelper getINSTANCE() {
+		if (INSTANCE == null)
+			INSTANCE = new EmpresaDAOHelper();
 		
+		return INSTANCE;
 	}
 	
 }

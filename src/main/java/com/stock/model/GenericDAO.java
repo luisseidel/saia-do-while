@@ -7,8 +7,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 
+import com.stock.model.dao.helper.GenericDAOHelper;
 import com.stock.model.type.TransactionType;
 import com.stock.utils.HibernateUtil;
 
@@ -86,7 +88,7 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 		return null;
 	}
 	
-	public abstract List<T> findByExample(T entity); 
+	public abstract List<T> findByExample(T entity);
 	
 	public Class<T> getClasz() {
 		return clasz;
@@ -111,6 +113,5 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 	public void setTransactionType(TransactionType transactionType) {
 		this.transactionType = transactionType;
 	}
-
 	
 }

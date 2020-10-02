@@ -19,13 +19,18 @@ public class EmpresaDAO extends GenericDAO<Empresa, Long> {
 	public EmpresaDAO() {
 		super(Empresa.class);
 	}
-
+	
+	@Override
 	public List<Empresa> findByExample(Empresa entity) {
 		Session session = HibernateUtil.openSession(entity);
 		Criteria crit = session.createCriteria(Empresa.class); 
-		crit = EmpresaDAOHelper.queryForFindEmpresaByExample(entity, crit);
-		
-		return crit.list();
-	}
+		crit = EmpresaDAOHelper.getINSTANCE().findByExample(entity, crit);
 
+		List<Empresa> result = crit.list();
+		
+		session.close();
+		
+		return result;
+	}
+	
 }
