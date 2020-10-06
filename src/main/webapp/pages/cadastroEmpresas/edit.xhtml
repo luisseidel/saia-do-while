@@ -11,10 +11,25 @@
       
 	<ui:define name="editContent">
 	
-		<p:outputLabel value="#{lbl.id}" />
-		<p:inputText disabled="true" />
+		<p:outputLabel value="#{lbl.codigo}" />
+		<p:inputText disabled="true" value="#{empresaM.entity.id}" />
 	
+		<p:outputLabel value="#{lbl.nomeFantasia}"/>
+		<p:inputText value="#{empresaM.entity.nomeFantasia}" />
+		
+		<p:outputLabel value="#{lbl.razaoSocial}"/>
+		<p:inputText value="#{empresaM.entity.razaoSocial}" />
+		
+		<p:outputLabel value="#{lbl.cnpj}"/>
+		<p:inputMask value="#{empresaM.entity.cnpj}" mask="#{lbl.cnpj_mask_input}" maxlength="14" />
+		
+		<p:commandButton value="#{lbl.salvar}" icon="#{lbl.icon_save}" action="#{empresaM.salvar()}" update="@form" />
+		<p:commandButton value="#{lbl.voltar}" icon="#{lbl.icon_back}" action="#{empresaM.voltarLista()}" update="@form" />
 	
+	</ui:define>
+	
+	<ui:define name="saveState">
+		<t:saveState value="#{empresaM.entity}" />
 	</ui:define>
       
 </ui:composition>

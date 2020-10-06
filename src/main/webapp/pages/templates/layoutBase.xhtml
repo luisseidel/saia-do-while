@@ -7,23 +7,24 @@
       
       <h:head>
       	<meta http-equiv="Content Type" content="text/html; charset=UTF-8" />
+      	<h:outputStylesheet library="css" name="reset.css" />
       	<h:outputStylesheet library="css" name="default.css" />
       	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
       </h:head>
       
       <h:body>
       
-      	<div id="header">
+      	<div id="header" class="header">
       		<ui:include src="header.xhtml" />
       	</div>
       	
       	<!-- Local onde será inserido o conteúdo da página -->
-      	<div id="content" style="margin-top: 1%" >
+      	<div id="content" class="main-content" >
       		<p:growl id="growlMessages" showDetail="true" />
       		<ui:insert name="content" />
       	</div>
       	
-      	<div id="footer">
+      	<div id="footer" class="footer">
       		<ui:include src="footer.xhtml" />
       	</div>
       

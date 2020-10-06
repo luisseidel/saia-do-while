@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 
 import com.stock.controller.service.EmpresaService;
 import com.stock.model.entities.Empresa;
+import com.stock.stockException.StockException;
+import com.stock.utils.ValidationUtils;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,16 +18,26 @@ import lombok.Setter;
 public class EmpresaMBean extends GenericMBean<Empresa, Long> {
 
 	private static final long serialVersionUID = 1223739738744010169L;
-	private Empresa entitySearch;
+	
 	
 	@Override
 	public void init() {
 		super.init();
-		entitySearch = new Empresa();
+		super.entitySearch = new Empresa();
+		super.entity = new Empresa();
 	}
-
-	public void find() {
-		super.list = getEmpresaService().findByExample(entitySearch);
+	
+	@Override
+	public void beforeSearch() {
+		super.beforeSearch();
+		
+		try {
+			if (!ValidationUtils.validateCNPJ(entitySearch.getCnpj())) {
+				throw new StockException("cnpj_invalido"); 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private EmpresaService getEmpresaService() {
@@ -35,5 +47,5 @@ public class EmpresaMBean extends GenericMBean<Empresa, Long> {
 	public void setEmpresaService(EmpresaService service) {
 		super.setBaseService(service);
 	}
-	
+
 }

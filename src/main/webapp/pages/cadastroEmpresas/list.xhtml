@@ -21,10 +21,10 @@
 		<p:inputText value="#{empresaM.entitySearch.razaoSocial}" />
 		
 		<p:outputLabel value="#{lbl.cnpj}" />
-		<p:inputMask value="#{empresaM.entitySearch.cnpj}" mask="#{lbl.cnpj_mask}" maxlength="14" />
+		<p:inputMask value="#{empresaM.entitySearch.cnpj}" mask="#{lbl.cnpj_mask_input}" maxlength="14" />
 		
-		<p:commandButton value="#{lbl.pesquisar}" action="#{empresaM.find()}" update="empresas growlMessages" icon="#{lbl.icon_search}" />
-		<p:commandButton value="#{lbl.inserir}" action="#{empresaM.insert()}" update="empresas growlMessages" icon="#{lbl.icon_insert}" />
+		<p:commandButton value="#{lbl.pesquisar}" action="#{empresaM.search()}" update="empresas growlMessages" icon="#{lbl.icon_search}" />
+		<p:commandButton value="#{lbl.inserir}" action="#{empresaM.goInsert()}" update="empresas growlMessages" icon="#{lbl.icon_insert}" />
 		
 	</ui:define>
 	
@@ -48,7 +48,13 @@
    			</p:column>
    			
    			<p:column headerText="#{lbl.cnpj}">
-   				<h:outputText value="#{row.cnpj}" />
+   				<h:outputText value="#{formatU.formatCnpj(row.cnpj)}" />
+   			</p:column>
+   			
+   			<p:column headerText="#{lbl.acoes}" styleClass="center-fit">
+   				<p:commandLink action="#{empresaM.edit(row)}">
+   					<i class="#{lbl.icon_edit}"></i>
+   				</p:commandLink>
    			</p:column>
    		
    		</p:dataTable>

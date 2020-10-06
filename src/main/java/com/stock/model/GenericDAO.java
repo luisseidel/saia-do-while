@@ -7,10 +7,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 
-import com.stock.model.dao.helper.GenericDAOHelper;
 import com.stock.model.type.TransactionType;
 import com.stock.utils.HibernateUtil;
 
