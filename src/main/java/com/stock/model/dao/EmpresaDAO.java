@@ -20,6 +20,7 @@ public class EmpresaDAO extends GenericDAO<Empresa, Long> {
 		super(Empresa.class);
 	}
 	
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public List<Empresa> findByExample(Empresa entity) {
 		Session session = HibernateUtil.openSession(entity);

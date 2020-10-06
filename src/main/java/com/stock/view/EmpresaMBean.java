@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import com.stock.controller.service.EmpresaService;
 import com.stock.model.entities.Empresa;
 import com.stock.stockException.StockException;
-import com.stock.utils.ValidationUtils;
+import com.stock.utils.CpfCnpjUtils;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,16 +28,21 @@ public class EmpresaMBean extends GenericMBean<Empresa, Long> {
 	}
 	
 	@Override
-	public void beforeSearch() {
-		super.beforeSearch();
-		
+	public void beforePersist() {
+		super.beforePersist();
+		validateForPersist();
+	}
+	
+	public void validateForPersist() {
 		try {
-			if (!ValidationUtils.validateCNPJ(entitySearch.getCnpj())) {
+			if (!CpfCnpjUtils.isValid(entity.getCnpj())) {
 				throw new StockException("cnpj_invalido"); 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		entity.setCnpj(CpfCnpjUtils.removeSpecialChars(entity.getCnpj()));
 	}
 	
 	private EmpresaService getEmpresaService() {

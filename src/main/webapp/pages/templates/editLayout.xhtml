@@ -6,6 +6,7 @@
       xmlns:h="http://java.sun.com/jsf/html" 
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
       template="./layoutBase.xhtml">
       
 	<ui:define name="content">
@@ -14,8 +15,8 @@
 			<p:growl id="growlMessages" showDetail="true" />
 			<p:messages id="messages" showDetail="true" closable="true" />
 		
-			<p:panel id="editContent" style="margin-bottom: 1%">
-				<h:panelGrid columns="2" captionClass="label,value">
+			<p:panel id="editContent" styleClass="editContent">
+				<h:panelGrid columns="2" styleClass="labels,values">
 					<ui:insert name="editContent"/>
 				</h:panelGrid>
 			</p:panel>
@@ -24,8 +25,9 @@
 		
 		<ui:insert name="afterForm" />
 
+
 		<ui:insert name="saveState" />
-		
+
 	</ui:define>
       
 </ui:composition>

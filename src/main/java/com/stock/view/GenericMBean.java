@@ -55,13 +55,17 @@ public abstract class GenericMBean<T, PK extends Serializable> implements Serial
 		return transaction.getScreen();
 	}
 	
+	public void beforePersist() {}
+	
 	public void persist() {
+		this.beforePersist();
+		
 		if (getTransaction() == TransactionType.INSERT) {
 			getBaseService().insert(this.entity);
 		} else {
 			getBaseService().update(this.entity);
 		}
-	}
+}
 	
 	public String edit(BaseEntity entity) {
 		transaction = TransactionType.UPDATE;

@@ -7,6 +7,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import com.stock.model.type.TransactionType;
@@ -41,6 +43,7 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 		getTransaction(transactionType, entity);
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void getTransaction(TransactionType transactionType, T entity) {
 		Transaction transaction = null;
 		Session session = HibernateUtil.openSession(entity);
@@ -56,7 +59,6 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
 	        	session.remove(entity);
 	        }
 	        
-	        transaction.commit();
 	        session.flush();
 	        
 		} catch (Exception e) {
@@ -65,14 +67,17 @@ public abstract class GenericDAO<T, PK extends Serializable> implements Serializ
             }
             e.printStackTrace();
 		} finally {
+			transaction.commit();
 			session.close();
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public T findById(Long id) {
 		Session session = HibernateUtil.openSession(entity);
 		
 		try {
+			@SuppressWarnings("deprecation")
 			Criteria crit = session.createCriteria(getClasz());
 			crit.add(Restrictions.idEq(id));
 			return (T) crit.uniqueResult();

@@ -67,6 +67,13 @@
 		    <artifactId>all-themes</artifactId>
 		    <version>1.0.10</version>
 		</dependency>
+		
+		<!-- Font awesome icons -->
+		<dependency>
+		     <groupId>org.webjars</groupId>
+		     <artifactId>font-awesome</artifactId>
+		     <version>5.15.0</version>
+		</dependency>
 				
 		<!-- JSF -->
 		<dependency>

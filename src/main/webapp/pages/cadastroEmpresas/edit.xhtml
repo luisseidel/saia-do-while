@@ -23,13 +23,14 @@
 		<p:outputLabel value="#{lbl.cnpj}"/>
 		<p:inputMask value="#{empresaM.entity.cnpj}" mask="#{lbl.cnpj_mask_input}" maxlength="14" />
 		
-		<p:commandButton value="#{lbl.salvar}" icon="#{lbl.icon_save}" action="#{empresaM.salvar()}" update="@form" />
+		<p:commandButton value="#{lbl.salvar}" icon="#{lbl.icon_save}" action="#{empresaM.persist()}" update="@form" />
 		<p:commandButton value="#{lbl.voltar}" icon="#{lbl.icon_back}" action="#{empresaM.voltarLista()}" update="@form" />
 	
 	</ui:define>
 	
 	<ui:define name="saveState">
 		<t:saveState value="#{empresaM.entity}" />
+		<t:saveState value="#{empresaM.transaction}" />
 	</ui:define>
-      
+	
 </ui:composition>

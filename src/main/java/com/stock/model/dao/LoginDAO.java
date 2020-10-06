@@ -20,6 +20,7 @@ public class LoginDAO extends GenericDAO<Usuario, Long> {
 	
 	private static final long serialVersionUID = 4385194662090893131L;
 
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public List<Usuario> findByExample(Usuario entity) {
 		Session session = HibernateUtil.openSession(entity);
