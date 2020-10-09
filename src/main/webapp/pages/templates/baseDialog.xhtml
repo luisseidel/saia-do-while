@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+					  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+  	  xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+      
+	<p:dialog id="dialogInsert"
+			  widgetVar="dialogInsert"
+			  closable="true"
+			  closeOnEscape="true"
+			  header="#{lbl.inserirEditar}"
+			  modal="true"
+			  height="400px"
+			  width="600px">
+	
+		<h:form id="formDialog">
+			<h:panelGrid columns="2" columnClasses="labels, values">
+				<ui:insert name="fields"/>
+			</h:panelGrid>		
+		</h:form>
+	</p:dialog>
+</ui:composition>

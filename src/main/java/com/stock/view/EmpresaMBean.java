@@ -1,5 +1,6 @@
 package com.stock.view;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -35,6 +36,9 @@ public class EmpresaMBean extends GenericMBean<Empresa, Long> {
 	
 	public void validateForPersist() {
 		try {
+			if (StringUtils.isEmpty(getEntity().getNomeFantasia()))
+				throw new StockException("Preencha corretamente os campos obrigatórios!");
+			
 			if (!CpfCnpjUtils.isValid(entity.getCnpj())) {
 				throw new StockException("cnpj_invalido"); 
 			}

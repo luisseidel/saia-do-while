@@ -15,8 +15,8 @@
 			<p:growl id="growlMessages" showDetail="true" />
 			<p:messages id="messages" showDetail="true" closable="true" />
 		
-			<p:panel id="editContent" styleClass="editContent">
-				<h:panelGrid columns="2" styleClass="labels,values">
+			<p:panel id="editContent" styleClass="margins" header="#{lbl.inserirEditar}">
+				<h:panelGrid columns="2" columnClasses="labels, values">
 					<ui:insert name="editContent"/>
 				</h:panelGrid>
 			</p:panel>
@@ -24,7 +24,6 @@
 		</h:form>
 		
 		<ui:insert name="afterForm" />
-
 
 		<ui:insert name="saveState" />
 

@@ -47,11 +47,13 @@ public abstract class GenericMBean<T, PK extends Serializable> implements Serial
 	public String goInsert() {
 		this.transaction = TransactionType.INSERT;
 		this.defaultValuesForInsert();
+		
 		return transaction.getScreen();
 	}
 	
 	public String voltarLista() {
 		this.transaction = TransactionType.SEARCH;
+		
 		return transaction.getScreen();
 	}
 	

@@ -16,20 +16,22 @@
 	font-size: 10px;
 }
 
-.editContent {
+.margins {
 	margin: 1%;
 	padding: 1%;
 }
 
 .labels {
-	margin: 1%;
-	padding: 1%;
+	margin: 2%;
+	padding: 2%;
 }
 
 .values {
-	margin: 1%;
-	padding: 1%;
+	margin: 2%;
+	padding: 2%;
 }
+
+
 
 @media screen and (max-width: 799px) {
 	

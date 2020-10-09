@@ -15,13 +15,15 @@
 			<p:growl id="growlMessages" showDetail="true" />
 			<p:messages id="messages" showDetail="true" closable="true" />
 		
-			<p:panel id="searchParameters" header="#{lbl.pesquisa}" style="margin-bottom: 1%">
-				<h:panelGrid columns="2" captionClass="label,value">
+			<p:panel id="searchParameters" header="#{lbl.pesquisa}" styleClass="margins">
+				<h:panelGrid columns="2" columnClasses="labels, values">
 					<ui:insert name="searchParameters"/>
 				</h:panelGrid>
 			</p:panel>
 			
-			<ui:insert name="dataTable" />
+			<p:panel id="resultados" header="#{lbl.resultados}" styleClass="margins">
+				<ui:insert name="dataTable" />
+			</p:panel>
 		</h:form>
 		
 		<ui:insert name="afterForm" />
