@@ -23,7 +23,7 @@ public class HibernateUtil {
             	props.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
             	props.put(Environment.URL, "jdbc:mysql://localhost:3306/stock?serverTimezone=UTC");
             	props.put(Environment.USER, "root");
-            	props.put(Environment.PASS, "spA2w@yajEv2");
+            	props.put(Environment.PASS, "");
             	props.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
             	props.put(Environment.SHOW_SQL, "true");
             	props.put(Environment.FORMAT_SQL, "true");
