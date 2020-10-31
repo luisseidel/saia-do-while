@@ -1,7 +1,7 @@
 # PROJETO JAVA WEB
 
 ## Autor: Luis Guilherme Seidel
-## Tecnologias Utilizadas: Java, MySQL, Primefaces, CSS3, Javascript, Xhtml, MVC, controle de versões com git.
+## Tecnologias Utilizadas: Java, MySQL, Primefaces, CSS3, Javascript, Xhtml, Hibernate, MVC, controle de versões com git.
 
 ## O que este projeto é:
 
