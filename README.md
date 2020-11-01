@@ -14,4 +14,3 @@
 ## O que este projeto não é:
 1. Um projeto para aprender a programar. Pois acredito que já existem muitos cursos bons que fazem isso melhor do que eu poderia ensinar.
 2. Um projeto para ser usado comercialmente.
-3. Não será dada manutenção futura para o projeto e possíveis erros e evoluções deverão ser feitas pelo próprio aluno/usuário.
