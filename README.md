@@ -1,4 +1,4 @@
-# PROJETO JAVA WEB
+# Saia do while - Crie um projeto em Java para web
 
 ## Autor: Luis Guilherme Seidel
 ## Tecnologias Utilizadas: Java, MySQL, Primefaces, CSS3, Javascript, Xhtml, Hibernate, MVC, controle de versões com git.
